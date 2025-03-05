@@ -29,11 +29,13 @@ df.to_csv('linki.csv', index=False)
 lista = []
 #
 for link in links:
-    link = os.path.join("output", link)
+    link = f"output/{link}"
     soup = parse_local_html(link)
+    year = soup.find('title').text
     nominowani = soup.select('.nominee')
     for nominee in nominowani:
         lista.append({
+            "year": year,
             "link": link,
             "name": nominee.find('p').text
         })
